@@ -70,6 +70,23 @@ export default function AnimatedPhoto({ src, alt, className }: AnimatedPhotoProp
         ctx.lineWidth = 1
         ctx.stroke()
       }
+
+      // Add a second set of animated particles that move in the opposite direction
+      const particleCount = 24
+      const particleOffset = -time / 4000
+
+      for (let i = 0; i < particleCount; i++) {
+        const angle = (i / particleCount) * Math.PI * 2 + particleOffset
+        const distance = radius + 10 + Math.sin(time / 1000 + i) * 5
+        const x = centerX + Math.cos(angle) * distance
+        const y = centerY + Math.sin(angle) * distance
+
+        // Draw smaller particles
+        ctx.beginPath()
+        ctx.arc(x, y, 2, 0, Math.PI * 2)
+        ctx.fillStyle = "#c83349" // Rose color
+        ctx.fill()
+      }
     }
 
     let animationId: number
